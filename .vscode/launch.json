@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug hw1",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/hw1.out",
+        // "program": "/home/salihhassan/compilation_old/COMPILATION-HW1/hw1.out",
+        // "args": ["<", "/home/salihhassan/compilation_old/COMPILATION-HW1/tests/hw1/tests/test938.in"],
+        "args": ["<", "/home/salihhassan/compilation_old/COMPILATION-HW1/mytest1.in"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "build hw1.out",
+        "miDebuggerPath": "/usr/local/bin/gdb"
+      }
+    ],
+    "tasks": [
+      {
+        "label": "build hw1",
+        "type": "shell",
+        "command": "g++",
+        "args": ["-g", "hw1.cpp","lex.yy.c", "-o", "hw1.out"],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }

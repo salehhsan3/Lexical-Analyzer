@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.json": "cpp",
+        "*.py": "python",
+        "*.tex": "latex",
+        "*.ejs": "html",
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "array": "cpp",
+        "initializer_list": "cpp",
+        "string_view": "cpp",
+        "utility": "cpp"
+    }
+}
