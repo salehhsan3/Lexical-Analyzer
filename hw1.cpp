@@ -9,9 +9,6 @@ using std::endl;
 using std::string;
 
 
-
-// made some changes to scanner.lex: removed "&&", "||", "!" for their respective operators.
-
 const char *getTokenName(int value)
 {
     switch (value)
@@ -77,7 +74,7 @@ bool isValidPrintableAscii(char char1, char char2)
 
 bool isValidPrintableCharacter(int c)
 {
-    return (c >= 0x20 && c <= 0x7E) || (c==0x09) || (c==0x0a) || (c==0x0d); // possible bug!! I'm not sure we should allow: [0x09, 0x0a, 0x0d]
+    return (c >= 0x20 && c <= 0x7E) || (c==0x09) || (c==0x0a) || (c==0x0d);
 }
 
 char hexPairToChar(char hex1, char hex2)
@@ -143,7 +140,6 @@ void handlestring(int token)
     output << yylineno << " " << "STRING" << " ";
     bool isclosed = ( str[str.size()] == '\"' );
     bool continuePrinting = true;
-    // for (size_t i = 0; i < str.size(); i++)
     for (size_t i = 0; i < yyleng; i++)
     {
         char curr_ch = str[i];
@@ -241,7 +237,6 @@ void handlestring(int token)
                 else
                 {
                     cout << "Error " << curr_ch << "\n"; // illegal non-printable character
-                    // cout << "Error " << "\n"; // illegal non-printable character
                     exit(0);
                 }
             }
@@ -263,16 +258,9 @@ int main()
     int token;
     while ( (token = yylex()) != 0 )
     {
-        // for (size_t i = 0; i < yyleng; i++)
-        // {
-        //     cout << "character is: " << yytext[i] << ", ASCII VALUE:" << static_cast<int>(yytext[i]) << endl;
-        // }
         if ( getTokenName(token) == "STRING" )
         {
             handlestring(token); // handles unclosed strings aswell
-            // a way to solve our problems is to define the following scanner.lex (I think):
-            // ERROR = (((\")(.)*\0(.)*(\")?)) | (.) and whenever we get error we can check if we have more than one character and if we do,
-            // we know it's necessarily a case with NULL
         }
         else if ( getTokenName(token) == "COMMENT" )
         {
@@ -288,7 +276,7 @@ int main()
         cout << "Error " << '\0' << endl;
         exit(0);
     }
-    // cout << "Error " << yytext << endl; // receiver an ILLEGAL character (ERROR)
-    // exit(0); // not working!
-    return 0;
+    if(strlen(yytext) == 1 && yytext[0]!=0x1A)
+        cout << "Error " << yytext << endl; // receiver an ILLEGAL character (ERROR)
+    exit(0); 
 }
