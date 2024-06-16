@@ -288,6 +288,7 @@ int main()
         cout << "Error " << '\0' << endl;
         exit(0);
     }
-    cout << "Error " << yytext << endl; // receiver an ILLEGAL character (ERROR)
-    exit(0); // not working!
+    // cout << "Error " << yytext << endl; // receiver an ILLEGAL character (ERROR)
+    // exit(0); // not working!
+    return 0;
 }
